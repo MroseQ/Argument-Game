@@ -3,6 +3,6 @@ Code made by myself. Game in which you need your logic skills to progress the st
 
 Game available here: https://drive.google.com/file/d/1uQ8ChGt9AUTZRSRRlSVBGjBA99WIecPZ/view?usp=sharing .
 
-If wanted, I can give the access to unity project.
+If needed, I can give the access to unity project.
 
 Marek K.
