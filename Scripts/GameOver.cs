@@ -14,14 +14,17 @@ public class GameOver : MonoBehaviour
     }
     void Update()
     {
-        if(!GameObject.Find("Video Player").GetComponent<VideoPlayer>().isPlaying && start) //Exits the app.
+        if(!GameObject.Find("Video Player").GetComponent<VideoPlayer>().isPlaying && start)
         {
+            SP.storyProgress = 0;
+            SP.plotID = 0;
+            SP.lifes = 5;
             Application.Quit();
         }
     }
     public IEnumerator Starting()
     {
-        yield return new WaitForSeconds(2); //Waits for the video to start.
+        yield return new WaitForSeconds(2);
         start = true;
     }
 }

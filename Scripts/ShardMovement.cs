@@ -11,13 +11,14 @@ public class ShardMovement : MonoBehaviour
 
     private void Start()
     {
-        // If on a start of the game, moving shards are disabled.
         if (storyProgress.storyProgress <= 0)
         {
             gameObject.SetActive(false);
         }
-
-
+        else
+        {
+            gameObject.SetActive(true);
+        }
         speed = Random.Range(5f, 8f);
         rotationSpeed = Random.Range(40, 50);
         int random = Random.Range(1, 3);
@@ -29,20 +30,20 @@ public class ShardMovement : MonoBehaviour
         {
             destination = new Vector3(Random.Range(0.5f, 1f), Random.Range(-1f, 1f));
         }
-        rotation = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
+        rotation = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0/*Random.Range(-1f, 1f)*/);
     }
 
-    private void LateUpdate()
+    // Update is called once per frame
+    private void Update()
     {
-        // Shard movements made every frame, destroying the objects after 6 seconds.
-        transform.position += destination * Time.deltaTime * speed;
-        transform.Rotate(rotation * Time.deltaTime * rotationSpeed);
+        GetComponent<Transform>().transform.position += destination * Time.deltaTime * speed;
+        GetComponent<Transform>().transform.Rotate(rotation * Time.deltaTime * rotationSpeed);
         StartCoroutine(Disable());
     }
 
     private IEnumerator Disable()
     {
         yield return new WaitForSecondsRealtime(6);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

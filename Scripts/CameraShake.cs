@@ -7,7 +7,7 @@ public class CameraShake : MonoBehaviour
     private bool start = true;
     void Update()
     {
-        if (start && !GetComponent<CoreArgumentLoader>().pauseGame) //Camera movement as a visual effect. 
+        if (start && !GetComponent<TextLoader>().pauseGame)
         {
             start = false;
             var positionX = Random.Range(-0.01f, 0.01f);
@@ -36,7 +36,7 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    public IEnumerator Waiting() // Waits a bit so the scene is not that much chaotic.     
+    public IEnumerator Waiting()
     {
         yield return new WaitForSeconds(0.04f);
         start = true;

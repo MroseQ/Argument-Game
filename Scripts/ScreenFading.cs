@@ -2,54 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScreenFading : MonoBehaviour
 {
-    public bool fadeOut;
-    public GameObject cubeFading;
-    private Color newColor;
-    private float fadeAmount;
-    public bool ifRed;
-    void Start()
-    {
-        newColor = cubeFading.GetComponent<MeshRenderer>().material.color;
-    }
+    [SerializeField] private float maxAlpha;
+    public bool fadeOut = true;
 
     void Update()
     {
-        var condition = ConditionCheck();
-        if (condition)
+        Color color = GetComponent<Image>().color;
+        if (color.a > 0f && color.a <= maxAlpha || (SceneManager.GetActiveScene().name == "DialogBox" && !Camera.main.GetComponent<DialogSpriteRenderer>().whiteFade && !Camera.main.GetComponent<DialogSpriteRenderer>().blueFade))
         {
-            // Check which fade should accur and apply changes every frame.
-
             if (fadeOut)
             {
-                fadeAmount = newColor.a - (1f * Time.deltaTime);
-                if (fadeAmount < 0f) fadeAmount = 0f;
+                color = new Color(color.r, color.g, color.b, (color.a - Time.deltaTime) > 0f ? color.a - Time.deltaTime:0f);
+                GetComponent<Image>().color = color;
             }
             else
             {
-                fadeAmount = newColor.a + (1f * Time.deltaTime);
-                if (fadeAmount > 1f) fadeAmount = 1f;
+                color = new Color(color.r, color.g, color.b, (color.a + Time.deltaTime) < maxAlpha ? color.a + Time.deltaTime : maxAlpha);
+                GetComponent<Image>().color = color;
             }
-            newColor = new Color(newColor.r, newColor.g, newColor.b, fadeAmount);
-            cubeFading.GetComponent<MeshRenderer>().material.color = newColor;
         }
     }
 
-    private bool ConditionCheck()
+    public void SetColorScreen(float r, float g, float b)
     {
-        // Check for special events, where the screen should fade with a different color.
+        GetComponent<Image>().color = new Color(r, g, b, maxAlpha);
+        fadeOut = true;
+    }
 
-        bool condition;
-        if (SceneManager.GetActiveScene().name == "DialogBox")
-        {
-            condition = !GetComponent<DialogSpriteRenderer>().whiteFade && !GetComponent<DialogSpriteRenderer>().blueFade;
-        }
-        else
-        {
-            condition = !ifRed;
-        }
-        return condition;
+    public void RevertToBlack()
+    {
+        GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
+    }
+
+    public IEnumerator SwitchOffWhenTransparent()
+    {
+        yield return new WaitUntil(() => GetComponent<Image>().color.a == 0f);
+        gameObject.SetActive(false);
     }
 }
