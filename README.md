@@ -2,7 +2,7 @@
 <h4 align="center">using C# Unity <br>by Marek Krasiński<br>ONLY IN POLISH LANGUAGE</h4>
 <h3 align="center"><i>Game in which you need your logic skills to progress the story</i> --- inspired by DANGANRONPA V3</h3>
 
-<b align="center">DISCLAIMER: Some of the assets used in this project are not of my authorship, and I do not possess full copyright. These assets have been used solely for narrative and demonstrative purposes. All copyrights belong to their rightful owners. If you are the copyright owner of any of the used assets and wish for them to be removed or appropriately identified, please get in touch with me. </b> 
+<h6 align="center">DISCLAIMER: Some of the assets used in this project are not of my authorship, and I do not possess full copyright. These assets have been used solely for narrative and demonstrative purposes. All copyrights belong to their rightful owners. If you are the copyright owner of any of the used assets and wish for them to be removed or appropriately identified, please get in touch with me. </h6> 
 
 <br>
 <p>
